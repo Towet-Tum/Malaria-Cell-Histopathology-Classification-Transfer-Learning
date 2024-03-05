@@ -9,6 +9,8 @@ from box import ConfigBox
 from pathlib import Path
 from typing import Any
 import base64
+import tensorflow as tf
+import matplotlib.pyplot as plt
 
 
 @ensure_annotations
@@ -132,3 +134,65 @@ def decodeImage(imgstring, fileName):
 def encodeImageIntoBase64(croppedImagePath):
     with open(croppedImagePath, "rb") as f:
         return base64.b64encode(f.read())
+
+
+def load__process_dataset(dataset, batch_size=32, img_size=(224, 224)):
+    train_dataset = tf.keras.utils.image_dataset_from_directory(
+        dataset,
+        shuffle=True,
+        batch_size=32,
+        image_size=(224, 224),
+        validation_split=0.2,
+        subset="training",
+        seed=123,
+    )
+
+    validation_dataset = tf.keras.utils.image_dataset_from_directory(
+        dataset,
+        shuffle=True,
+        batch_size=32,
+        image_size=(224, 224),
+        validation_split=0.2,
+        subset="validation",
+        seed=123,
+    )
+    class_names = train_dataset.class_names
+    val_batches = tf.data.experimental.cardinality(validation_dataset)
+    test_dataset = validation_dataset.take(val_batches // 5)
+    validation_dataset = validation_dataset.skip(val_batches // 5)
+
+    AUTOTUNE = tf.data.AUTOTUNE
+
+    train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
+    validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)
+    test_dataset = test_dataset.prefetch(buffer_size=AUTOTUNE)
+    return train_dataset, validation_dataset, test_dataset, class_names
+
+
+def save_plot(history, filename):
+    acc = history.history["accuracy"]
+    val_acc = history.history["val_accuracy"]
+
+    loss = history.history["loss"]
+    val_loss = history.history["val_loss"]
+
+    plt.figure(figsize=(8, 8))
+    plt.subplot(2, 1, 1)
+    plt.plot(acc, label="Training Accuracy")
+    plt.plot(val_acc, label="Validation Accuracy")
+    plt.legend(loc="lower right")
+    plt.ylabel("Accuracy")
+    plt.ylim([min(plt.ylim()), 1])
+    plt.title("Training and Validation Accuracy")
+
+    plt.subplot(2, 1, 2)
+    plt.plot(loss, label="Training Loss")
+    plt.plot(val_loss, label="Validation Loss")
+    plt.legend(loc="upper right")
+    plt.ylabel("Cross Entropy")
+    plt.ylim([0, 1.0])
+    plt.title("Training and Validation Loss")
+    plt.xlabel("epoch")
+
+    # Save the plot to the specified file
+    plt.savefig(filename)
