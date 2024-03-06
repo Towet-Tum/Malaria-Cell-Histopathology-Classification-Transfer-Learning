@@ -2,4 +2,5 @@
 
 
 
-![Example Image]('https://github.com/Towet-Tum/Malaria-Cell-Histopathology-Classification-Transfer-Learning/blob/main/generated_malaria.png')
+![Example Image](https://raw.githubusercontent.com/Towet-Tum/Malaria-Cell-Histopathology-Classification-Transfer-Learning/main/generated_malaria.png
+)
