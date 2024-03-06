@@ -165,3 +165,11 @@ mlruns/*
 
 
 	
+.dvc/
+.dvc.lock
+.dvcignore
+.dvc/config
+*.dvc
+
+# DVC cache directory
+.dvc/cache/

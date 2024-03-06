@@ -41,12 +41,8 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             model_path=config.model_path,
             epochs=param.EPOCH,
-            base_model=param.BASE_MODEL,
             img_size=param.IMG_SIZE,
             batch_size=param.BATCH_SIZE,
-            optimizer=param.OPTIMIZER,
-            loss=param.LOSS,
-            metrics=param.METRICS,
             dataset=str(dataset),
         )
         return training_config

@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/MalariaCellHistopathologyClassification/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 359d9274ef3b067d6716e0e12143c063
+      size: 375
+    - path: src/MalariaCellHistopathologyClassification/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: d3628df94811f7d26bda3c69c85dd3d3
+      size: 1058
+    outs:
+    - path: artifacts/data_ingestion/dataset
+      hash: md5
+      md5: 66999315fe099c72be81b64a2099bdf1.dir
+      size: 350952589
+      nfiles: 27560

@@ -16,11 +16,7 @@ class TrainingConfig:
     model_path: Path
     dataset: Path
     epochs: int
-    loss: str
-    optimizer: str
-    base_model: str
     batch_size: int
-    metrics: list
     img_size: tuple
 
 
