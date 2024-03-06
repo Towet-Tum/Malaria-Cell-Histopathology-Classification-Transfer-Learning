@@ -3,5 +3,6 @@
 
 
 
-![Generated Malaria Image](https://raw.githubusercontent.com/Towet-Tum/Malaria-Cell-Histopathology-Classification-Transfer-Learning/main/generated_malaria.png){ height=400px }
+<img src="https://github.com/Towet-Tum/Malaria-Cell-Histopathology-Classification-Transfer-Learning/raw/main/generated_malaria.png" alt="Alt Text" height="300">
+
 
