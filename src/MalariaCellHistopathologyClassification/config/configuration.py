@@ -1,3 +1,4 @@
+import os
 from MalariaCellHistopathologyClassification.constants import *
 from MalariaCellHistopathologyClassification.utils.common import (
     create_directories,
@@ -6,6 +7,7 @@ from MalariaCellHistopathologyClassification.utils.common import (
 from MalariaCellHistopathologyClassification.entity.config_entity import (
     DataIngestionConfig,
     TrainingConfig,
+    EvaluationConfig,
 )
 
 
@@ -48,3 +50,16 @@ class ConfigurationManager:
             dataset=str(dataset),
         )
         return training_config
+
+    def get_evaluation_config(self) -> EvaluationConfig:
+
+        dataset = os.path.join("artifacts", "data_ingestion", "dataset/")
+        eval_config = EvaluationConfig(
+            model_path="artifacts/training/Malaria_cell_TF.h5",
+            mlflow_uri="https://dagshub.com/Towet-Tum/Malaria-Cell-Histopathology-Classification-Transfer-Learning.mlflow",
+            all_params=self.param,
+            params_image_size=self.param.IMG_SHAPE,
+            params_batch_size=self.param.BATCH_SIZE,
+            dataset=str(dataset),
+        )
+        return eval_config

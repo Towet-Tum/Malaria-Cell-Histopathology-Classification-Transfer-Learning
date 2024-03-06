@@ -10,10 +10,6 @@ class DataIngestionConfig:
     unzip_dir: Path
 
 
-from dataclasses import dataclass
-from pathlib import Path
-
-
 @dataclass(frozen=True)
 class TrainingConfig:
     root_dir: Path
@@ -26,3 +22,13 @@ class TrainingConfig:
     batch_size: int
     metrics: list
     img_size: tuple
+
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    model_path: Path
+    dataset: Path
+    all_params: dict
+    mlflow_uri: str
+    params_image_size: list
+    params_batch_size: int

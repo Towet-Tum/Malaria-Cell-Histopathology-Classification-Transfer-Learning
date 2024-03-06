@@ -5,6 +5,9 @@ from MalariaCellHistopathologyClassification.pipeline.stage_01_data_ingestion im
 from MalariaCellHistopathologyClassification.pipeline.stage_02_model_trainer import (
     TrainingPipeline,
 )
+from MalariaCellHistopathologyClassification.pipeline.stage_03_model_evaluator import (
+    EvaluationPipeline,
+)
 
 STAGE_NAME = "Data Ingestion Satge"
 try:
@@ -23,6 +26,18 @@ try:
     logger.info(f"\n\n <<<<<<<<< The {STAGE_NAME} has started >>>>>>>>>>>>>> \n\n")
     training = TrainingPipeline()
     training.main()
+    logger.info(
+        f" \n\n <<<<<<<<< The {STAGE_NAME} has completed successfully >>>>>>>>>>>>> \n\n =========="
+    )
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Evaluation Stage"
+try:
+    logger.info(f"\n\n <<<<<<<<< The {STAGE_NAME} has started >>>>>>>>>>>>>> \n\n")
+    evaluations = EvaluationPipeline()
+    evaluations.main()
     logger.info(
         f" \n\n <<<<<<<<< The {STAGE_NAME} has completed successfully >>>>>>>>>>>>> \n\n =========="
     )
