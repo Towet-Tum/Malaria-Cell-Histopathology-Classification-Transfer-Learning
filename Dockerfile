@@ -15,8 +15,8 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Run Django migrations and collect static files
-RUN python MalariaApp/manage.py migrate
-RUN python MalariaApp/manage.py collectstatic --noinput
+RUN python MalariaClassificationApp/manage.py migrate
+RUN python MalariaClassificationApp/manage.py collectstatic --noinput
 
 # Start the Django app
 CMD ["python", "MalariaClassificationApp/manage.py", "runserver", "0.0.0.0:8000"]
