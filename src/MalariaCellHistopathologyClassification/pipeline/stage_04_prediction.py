@@ -12,7 +12,9 @@ class PredictionPipeline:
 
     def makePrediction(self):
 
-        model = load_model(os.path.join("artifacts", "training", "Malaria_cell_TF.h5"))
+        model = load_model(
+            "src/MalariaCellHistopathologyClassification/models/train_weights.py/Malaria_cell_TF.h5"
+        )
 
         class_names = ["Parasitized", "Uninfected"]
 

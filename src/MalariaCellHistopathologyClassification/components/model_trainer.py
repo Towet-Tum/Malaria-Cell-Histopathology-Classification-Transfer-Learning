@@ -53,7 +53,9 @@ class Training:
             validation_steps=len(val_ds) / 32,
             verbose=1,
         )
-        model.save(self.config.model_path)
+        model.save(
+            "src/MalariaCellHistopathologyClassification/models/train_weights.py/Malaria_cell_TF.h5"
+        )
         save_plot(
             history,
             "src/MalariaCellHistopathologyClassification/models/plots.py/history.png",
